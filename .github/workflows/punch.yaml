@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * 1-5'
     - cron: '0 11 * * 1-5'
 
+permissions:
+  contents: read
+
 jobs:
   attendence:
     name: do_punch
@@ -14,14 +17,14 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD}}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Punch in
         if: github.event.schedule == '0 0 * * 1-5'
-        uses: ninochang/punchin@v1
+        uses: ninochang/punchin@31bb7208dedb6bd88cefd9ec856dbc4141757ee9 # v1 (pinned, reviewed 2026-11-18)
         with:
           mode: in
       - name: Punch out
         if: github.event.schedule == '0 11 * * 1-5'
-        uses: ninochang/punchin@v1
+        uses: ninochang/punchin@31bb7208dedb6bd88cefd9ec856dbc4141757ee9 # v1 (pinned, reviewed 2026-11-18)
         with:
           mode: out
